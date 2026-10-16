@@ -1,0 +1,8 @@
+{
+  "name": "TechHelp",
+  "description": "TechHelp is the ultimate student hub. Features include study materials, internships, jobs, hackathons, previous year questions, e-books, and powerful AI career tools such as our AI Resume Builder, study chatbot, and roadmap maker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

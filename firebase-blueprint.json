@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "internship": {
+      "title": "Internship",
+      "description": "Information about available student internships",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string", "description": "Name of the offering company" },
+        "logoUrl": { "type": "string" },
+        "title": { "type": "string" },
+        "stipend": { "type": "string" },
+        "location": { "type": "string" },
+        "duration": { "type": "string" },
+        "applyUrl": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["companyName", "title", "applyUrl"]
+    },
+    "job": {
+      "title": "Job",
+      "description": "Details of latest job listings",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "role": { "type": "string" },
+        "salary": { "type": "string" },
+        "location": { "type": "string" },
+        "applyUrl": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["companyName", "role", "applyUrl"]
+    },
+    "studyMaterial": {
+      "title": "Study Material",
+      "description": "Notes, PYQs, and Syllabi for courses",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "category": { "type": "string", "enum": ["notes", "pyq", "syllabus", "ebook", "quantum"] },
+        "subject": { "type": "string" },
+        "branch": { "type": "string" },
+        "downloadUrl": { "type": "string" },
+        "downloadsCount": { "type": "integer" },
+        "uploadedBy": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "category", "downloadUrl"]
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Student or Admin written articles",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "content": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "author": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "content", "author"]
+    },
+    "discussion": {
+      "title": "Discussion Forum",
+      "description": "Community forum thread",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "upvotes": { "type": "integer" }
+      },
+      "required": ["title", "content", "authorId"]
+    },
+    "userProfile": {
+      "title": "User Profile",
+      "description": "Private and metadata fields for a student account",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "college": { "type": "string" },
+        "branch": { "type": "string" },
+        "year": { "type": "string" },
+        "bio": { "type": "string" }
+      },
+      "required": ["uid", "email", "displayName"]
+    }
+  },
+  "firestore": {
+    "internships/{internshipId}": {
+      "schema": "internship",
+      "description": "Internship collection"
+    },
+    "jobs/{jobId}": {
+      "schema": "job",
+      "description": "Job collection"
+    },
+    "studyMaterials/{materialId}": {
+      "schema": "studyMaterial",
+      "description": "Notes/PYQ study material collection"
+    },
+    "blogs/{blogId}": {
+      "schema": "blog",
+      "description": "Blog material collection"
+    },
+    "discussions/{discussionId}": {
+      "schema": "discussion",
+      "description": "General community discussions"
+    },
+    "userProfiles/{userId}": {
+      "schema": "userProfile",
+      "description": "Private registration and profile details"
+    }
+  }
+}

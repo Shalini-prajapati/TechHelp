@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == "5pshraddha55@gmail.com"
+      );
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // 1. User Profiles collection
+    match /userProfiles/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId) || isAdmin();
+    }
+
+    // 2. Internships
+    match /internships/{internshipId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 3. Jobs
+    match /jobs/{jobId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 4. Study Materials (Notes, PYQ, Syllabus, Ebooks)
+    match /studyMaterials/{materialId} {
+      allow read: if true;
+      allow write: if isSignedIn(); // Students can contribute study notes or administration can
+    }
+
+    // 5. Blogs
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 6. Discussions (Forums)
+    match /discussions/{discussionId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+  }
+}
